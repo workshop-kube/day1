@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-ruby-worker
+  labels:
+    app: demo-ruby-worker
+spec:
+  containers:
+    - name: worker-container
+      image: cr.yandex/crp7r0r719t2qkhkume1/hello-ruby:0.0.5
+      command: ["ruby"]
+      args: ["worker.rb"]

@@ -1,0 +1,24 @@
+# Файл terraform.tfvars.example для Yandex Cloud Terraform конфигурации
+
+# # Идентификатор облака в Yandex Cloud
+# yc_cloud_id = "b1gble3rv4rqjivshm41"
+
+# # Идентификатор папки в Yandex Cloud
+# yc_folder_id = "b1gn3ktttbgsnda6vh4v"
+
+# # Зона доступности в Yandex Cloud
+# zone = "ru-central1-a" # Или другая зона по вашему выбору
+
+# # Идентификатор сети в Yandex Cloud
+# network_id = "enpvshsu9uic8fp0jstv"
+
+# # Идентификатор подсети в Yandex Cloud
+# subnet_id = "e9bm4sg203fvcom83qp8"
+
+# # Сервисный аккаунт, который будет использоваться для выделения ресурсов Compute Cloud и VPC для кластера Kubernetes. 
+# # Выбранный сервисный аккаунт должен иметь роль editor в папке, где будет расположен кластер Kubernetes, и в папке, где находится выбранная сеть.
+# service_account_id = "aje2tbal9f3e0so3m62l"
+
+# # Сервисный аккаунт, который будет использоваться рабочими узлами кластера Kubernetes для доступа к реестру контейнеров или для отправки журналов и метрик узлов.
+# node_service_account_id = "aje0v4g3c8kvssehld5v"
+

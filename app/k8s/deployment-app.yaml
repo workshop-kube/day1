@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-ruby-app # Имя деплоймента.
+spec:
+  replicas: 2 # Количество реплик (подов), которые будут запущены.
+  selector:
+    matchLabels:
+      app: demo-ruby-app # Метка, используемая для выбора подов, которые будут управляться этим деплойментом.
+  template:
+    metadata:
+      labels:
+        app: demo-ruby-app # Метка, присваиваемая каждому создаваемому поду.
+    spec:
+      containers:
+        - name: app-container # Имя контейнера в поде
+          image: cr.yandex/crp7r0r719t2qkhkume1/hello-ruby:0.0.11 # ${IMAGE_NAME}
+          ports:
+            - containerPort: 9292
+          env:
+            - name: RACK_ENV
+              value: "production"
+          command: ["bundle", "exec", "rackup"]
+          args: ["--host", "0.0.0.0", "--port", "3000"]
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "200Mi"

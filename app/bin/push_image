@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+# Ensure the image string is provided as an argument
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <image>"
+  echo "Example: $0 cr.yandex/<REGISTRY_ID>/<IMAGE_NAME>:<IMAGE_VERSION>"
+  exit 1
+fi
+
+IMAGE=$1
+
+# Push Docker image
+echo "Pushing Docker image ${IMAGE}..."
+docker push "${IMAGE}"

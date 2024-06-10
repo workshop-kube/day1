@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-ruby-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-ruby-worker # Метка, используемая для выбора подов, которые будут управляться этим деплойментом.
+  template:
+    metadata:
+      labels:
+        app: demo-ruby-worker # Метка, присваиваемая каждому создаваемому поду.
+    spec:
+      containers:
+        - name: worker-container # Имя контейнера в поде
+          image: cr.yandex/crp7r0r719t2qkhkume1/hello-ruby:0.0.11 # ${IMAGE_NAME}
+          command: ["ruby"]
+          args: ["worker.rb"]
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "200Mi"

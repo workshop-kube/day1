@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+
+# Configuration
+CR_NAME=${CR_NAME:-yc-demo-cr}
+IMAGE_NAME=${IMAGE_NAME:-hello-ruby}
+IMAGE_VERSION=${1:-0.0.1}  # Use the first argument as IMAGE_VERSION, or default to 0.0.1
+
+# Check for necessary tools
+command -v yc >/dev/null 2>&1 || { echo >&2 "The yc command is required but it's not installed. Aborting."; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo >&2 "The jq command is required but it's not installed. Aborting."; exit 1; }
+command -v docker >/dev/null 2>&1 || { echo >&2 "The docker command is required but it's not installed. Aborting."; exit 1; }
+
+echo "Getting registry ID for ${CR_NAME}..."
+REGISTRY_ID=$(yc container registry get --name "${CR_NAME}" --format json | jq -r .id)
+
+if [ -z "${REGISTRY_ID}" ]; then
+    echo "Failed to get registry ID. Please check if the registry ${CR_NAME} exists."
+    exit 1
+fi
+
+echo "Registry ID: ${REGISTRY_ID}"
+echo "---------------------------------"
+
+echo "Building Docker image ${IMAGE_NAME}:${IMAGE_VERSION}..."
+docker build . -t "cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
+
+echo "---------------------------------"
+echo "Docker image built and tagged as cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
+echo "---------------------------------"
+{
+  printf "%-20s %-40s\n" "Parameter" "Value"
+  printf "%-20s %-40s\n" "--------------------" "----------------------------------------"
+  printf "%-20s %-40s\n" "IMAGE_NAME" "${IMAGE_NAME}"
+  printf "%-20s %-40s\n" "IMAGE_VERSION" "${IMAGE_VERSION}"
+  printf "%-20s %-40s\n" "IMAGE" "cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
+} | column -t
