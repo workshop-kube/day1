@@ -3,10 +3,10 @@
 #   type        = string
 # }
 
-# variable "yc_cloud_id" {
-#   description = "Идентификатор облака в Yandex Cloud"
-#   type        = string
-# }
+variable "yc_cloud_id" {
+  description = "Идентификатор облака в Yandex Cloud"
+  type        = string
+}
 
 variable "yc_folder_id" {
   description = "Идентификатор папки в Yandex Cloud"

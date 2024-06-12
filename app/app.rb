@@ -1,5 +1,5 @@
 class App
   def call(env)
-    [200, {}, ["Hello World"]]
+    [200, {}, ["<h1>Привет с первого вебинара</h1>"]]
   end
 end

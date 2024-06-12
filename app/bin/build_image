@@ -22,8 +22,9 @@ fi
 echo "Registry ID: ${REGISTRY_ID}"
 echo "---------------------------------"
 
+IMAGE="cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
 echo "Building Docker image ${IMAGE_NAME}:${IMAGE_VERSION}..."
-docker build . -t "cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
+docker build . -t $IMAGE
 
 echo "---------------------------------"
 echo "Docker image built and tagged as cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
@@ -33,5 +34,5 @@ echo "---------------------------------"
   printf "%-20s %-40s\n" "--------------------" "----------------------------------------"
   printf "%-20s %-40s\n" "IMAGE_NAME" "${IMAGE_NAME}"
   printf "%-20s %-40s\n" "IMAGE_VERSION" "${IMAGE_VERSION}"
-  printf "%-20s %-40s\n" "IMAGE" "cr.yandex/${REGISTRY_ID}/${IMAGE_NAME}:${IMAGE_VERSION}"
+  printf "%-20s %-40s\n" "IMAGE" "${IMAGE}"
 } | column -t
