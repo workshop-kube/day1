@@ -1,3 +1,6 @@
+# YC/Terraform keys
+**/*-key.json
+
 # Local .terraform directories
 **/.terraform/*
 .idea

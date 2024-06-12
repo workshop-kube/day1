@@ -23,4 +23,4 @@ COPY . .
 EXPOSE 9292
 
 # Определяем команду для запуска приложения
-#CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0"]
+# CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0"]

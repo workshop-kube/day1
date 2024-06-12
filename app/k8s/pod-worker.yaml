@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: worker-container
-      image: cr.yandex/crp7r0r719t2qkhkume1/hello-ruby:0.0.5
+      image: ${IMAGE}
       command: ["ruby"]
       args: ["worker.rb"]

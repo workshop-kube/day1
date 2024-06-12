@@ -3,7 +3,12 @@ kind: Deployment
 metadata:
   name: demo-ruby-app # Имя деплоймента.
 spec:
-  replicas: 2 # Количество реплик (подов), которые будут запущены.
+  replicas: 4 # Количество реплик (подов), которые будут запущены.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxSurge: 25%
+       maxUnavailable: 50%
   selector:
     matchLabels:
       app: demo-ruby-app # Метка, используемая для выбора подов, которые будут управляться этим деплойментом.
@@ -14,7 +19,7 @@ spec:
     spec:
       containers:
         - name: app-container # Имя контейнера в поде
-          image: cr.yandex/crp7r0r719t2qkhkume1/hello-ruby:0.0.11 # ${IMAGE_NAME}
+          image: ${IMAGE}
           ports:
             - containerPort: 9292
           env:
